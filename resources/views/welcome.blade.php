@@ -1,95 +1,80 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">    
+	<title> HOME | </title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
 
-        <title>Laravel</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+</head>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+<body>
 
-            .full-height {
-                height: 100vh;
-            }
+	<!-- Cabecera de la página -->
+	<nav class="nav-extended">
+		<div class="nav-wrapper" id="cabecera-rrss">
+			<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<span > ACCESO CLIENTES</span>
+				<a class="btn-floating btn-small waves-effect waves-light red "><i class="material-icons">perm_identity</i></a>
+				<a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
+				<a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">search</i></a>
+			</ul>
+		</div>
+			<nav id="cabecera">
+				<div class="nav-wrapper">
+					<a href="#" class="brand-logo">
+						<img id="logo" src="images/logo.fw.png" alt="">
+					</a>
+					<ul class="right hide-on-med-and-down secciones-nav-ul">
+						<li><a href="#">EMPRESA</a></li>
+						<li><a href="">PRODUCTOS</a></li>
+						<li><a href="#">DESCARGAS</a></li>
+						<li><a href="#">CALIDAD</a></li>
+						<li><a href="#">SERVICIO</a></li>
+						<li><a href="#">CONTACTO</a></li>
+					</ul>
+				</div>
+			</nav>
+	</nav> 
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+	<!-- Slider  -->
 
-            .position-ref {
-                position: relative;
-            }
+	<div class="slider">
+		<ul class="slides"  id="slider-home">
+			<li>
+				<img src="images/page1.fw.png"> <!-- random image -->
+				<div class="caption center-align" >
+					<h5 id="title-text-slider">ALTA TECNOLOGÍA AL SERVICIO DE LA INDUSTRIA</h5>
+					<h3 id="content-text-slider">50 años en el rubro, fabricantes de sopletes </h3>
+				</div>
+			</li>
+			<li>
+				<img src="images/page2.fw.png"> <!-- random image -->
+				<div class="caption center-align" >
+					<h5 id="title-text-slider">ALTA TECNOLOGÍA AL SERVICIO DE LA INDUSTRIA</h5>
+					<h3 id="content-text-slider">Equipos medicinales para oxígonosterapia </h3>
+				</div>
+			</li>
+		</ul>
+	</div>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
 
-            .content {
-                text-align: center;
-            }
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/materialize.min.js"></script>
+	<script>
+		$(document).ready(function(){
+		    $('.slider').slider({
+		    	height: 690
+		    })
+	  });
 
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
+        
+	</script>
+</body>
 </html>
