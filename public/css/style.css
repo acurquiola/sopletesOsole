@@ -47,21 +47,24 @@ html{
 	background: -webkit-linear-gradient(top, rgba(58,58,58,0.8) 26%,rgba(58,58,58,0.41) 98%,rgba(58,58,58,0.4) 100%,rgba(58,58,58,0.4) 102%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(to bottom, rgba(58,58,58,0.8) 26%,rgba(58,58,58,0.41) 98%,rgba(58,58,58,0.4) 100%,rgba(58,58,58,0.4) 102%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc3a3a3a', endColorstr='#663a3a3a',GradientType=0 ); /* IE6-9 */
-	width: 755px;
-	height: 257px;
-	position: absolute;
-	margin-left: 137px;
-	margin-top: 137px;
-	margin-right: 137px;
+	margin-top: 150px;
 }
 
-#title-text-slider{
-	text-align: center;
+#slider-home .caption-home{
+    top: 15%;
+    left: 25%;
+    width: 50%;
+    opacity: 0;
+}
+
+.title-text-slider{
 	font-size: 25px;
-}
-#content-text-slider{
-	text-align: center;
 	font-family: 'Source Sans Pro semibold';
-	font-size: 65px;
+    text-align: center;
 }
+
+.content-text-slider{
+	font-family: 'Source Sans Pro semibold';
+    text-align: center;
+	font-size: 65px;
 }
