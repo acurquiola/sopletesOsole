@@ -12,12 +12,12 @@ html{
 #cabecera-rrss{
 	height: 35px;
 	background: #ECECEC;
-	color: #666666;
 	font-family: 'Source Sans Pro semibold';
 }
 
 #cabecera-rrss ul{
 	margin-right: 40px;
+  color: #666666;
 }
 
 #logo{
@@ -67,4 +67,74 @@ html{
 	font-family: 'Source Sans Pro semibold';
     text-align: center;
 	font-size: 65px;
+}
+
+.title-home{
+	font-size: 35px;
+	color: #E1131B;
+	font-family: 'Source Sans Pro light';
+}
+
+#container-fluid{
+  width: 100%;
+}
+
+#container-fluid .card-destacados{
+	width: 270px; 
+	height: 270px;
+}
+
+#container-fluid .card-destacados img{
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+#container-fluid .card .card-title-destacados{
+	font-family: 'Source Sans Pro semibold';
+    text-align: right;
+	font-size: 19px;
+	width: 270px; 
+	height: 71px;
+}
+
+#container-fluid .card .card-action{
+	width: 270px; 
+	height: 75px;
+	color: #595959;
+}
+
+#container-fluid-empresa{
+  	width: 100%;
+	background: #F8F8F8;
+}
+
+#container-fluid-empresa img{
+	margin-top: 5%
+}
+
+#title-empresa{
+  	color: #DF1319;
+	font-size: 48px;
+	font-family: 'Source Sans Pro light';
+}
+
+#content-empresa{
+	font-size: 18px;
+	color: #666666;
+}
+
+#footer{
+	background: #595959;
+}
+
+#footer h5{
+	color: #033561;
+	font-size: 17px;
+	font-weight: bold
+}
+
+#footer .footer-text{
+	color: #EEEEEE;
+	font-size: 16px;	
 }
