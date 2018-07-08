@@ -11,16 +11,16 @@
 		</div>
 		<nav id="cabecera">
 			<div class="nav-wrapper">
-				<a href="#" class="brand-logo">
+				<a href="{{ url('/') }}" class="brand-logo">
 					<img id="logo" src="images/logo.png" alt="">
 				</a>
 				<ul class="right hide-on-med-and-down secciones-nav-ul">
-					<li><a href="#">EMPRESA</a></li>
-					<li><a href="">PRODUCTOS</a></li>
-					<li><a href="#">DESCARGAS</a></li>
-					<li><a href="#">CALIDAD</a></li>
-					<li><a href="#">SERVICIO</a></li>
-					<li><a href="#">CONTACTO</a></li>
+					<li><a href=" {{ url('/empresa')}} " {{ (\Request::is('empresa*'))?"id=seccion-active":"" }}>EMPRESA</a></li>
+					<li><a href=" {{ url('/productos')}} " {{ (\Request::is('productos*'))?"id=seccion-active":"" }}>PRODUCTOS</a></li>
+					<li><a href=" {{ url('/descargas')}} " {{ (\Request::is('descargas*'))?"id=seccion-active":"" }}>DESCARGAS</a></li>
+					<li><a href=" {{ url('/calidad')}} " {{ (\Request::is('calidad*'))?"id=seccion-active":"" }}>CALIDAD</a></li>
+					<li><a href=" {{ url('/servicio')}} " {{ (\Request::is('servicio*'))?"id=seccion-active":"" }}>SERVICIO</a></li>
+					<li><a href=" {{ url('/contacto')}} " {{ (\Request::is('contacto*'))?"id=seccion-active":"" }}>CONTACTO</a></li>
 				</ul>
 			</div>
 		</nav>

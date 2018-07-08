@@ -9,6 +9,12 @@ html{
 	background: #FFFFFF;
 }
 
+#cabecera li{
+	font-family: 'Source Sans Pro semibold';
+	font-size: 18px;
+
+}
+
 #cabecera-rrss{
 	height: 35px;
 	background: #ECECEC;
@@ -17,7 +23,7 @@ html{
 
 #cabecera-rrss ul{
 	margin-right: 40px;
-  color: #666666;
+	color: #666666;
 }
 
 #logo{
@@ -34,7 +40,15 @@ html{
 	margin-bottom: 63px;
 }
 
+#seccion-active{
+	color: #DF1319;
+}
 .secciones-nav-ul li a{
+	color: #6D6D6D;
+	font-family: 'Source Sans Pro semibold';
+}
+
+
 	color: #6D6D6D;
 	font-family: 'Source Sans Pro semibold';
 }
@@ -138,3 +152,15 @@ html{
 	color: #EEEEEE;
 	font-size: 16px;	
 }
+
+.cabecera-secciones{
+	background: #ECECEC;
+	height: 120px;
+}
+
+.cabecera-secciones h5{
+    position: absolute;
+    margin-top: 3%;
+    margin-left: 9%;
+}
+

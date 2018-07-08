@@ -11,6 +11,14 @@
 |
 */
 
+// Ruta para el inicio
+
 Route::get('/', function () {
     return view('home.home');
+});
+
+// Ruta para el inicio
+
+Route::get('/empresa', function () {
+    return view('empresa.home');
 });
