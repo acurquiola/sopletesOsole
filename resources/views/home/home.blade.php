@@ -1,16 +1,39 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-	<meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">	
-        <title> HOME | @yield('title') </title>
-        <link rel="stylesheet" href="css/materialize.min.css">
-</head>
+@extends('app')
+
+@section('content')
+
+
 <body>
 
-	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/materialize.min.js"></script>
+	<!-- Slider  -->
+	@include('home.partials.slider')
 	
+	<!-- Productos destacados  -->
+
+	@include('home.partials.destacados')
+	
+
+	<!-- La empresa -->
+
+	@include('home.partials.trayectoria')
+
+
+
+@endsection
+
+
+@include('partials.script')
+
+	<script>
+		$(document).ready(function(){
+			$('.slider').slider({
+				height: 690
+			})
+		});
+
+
+	</script>
+
+
 </body>
 </html>
