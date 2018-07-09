@@ -1,8 +1,8 @@
 <div class="slider">
-	<ul class="slides"  id="slider-home">
+	<ul class="slides" id="slider-home" >
 		<li>
 			<img src="images/slider1.png"> 
-			<div class="caption caption-home" >
+			<div class="caption caption-home"  >
 				<h5 class="title-text-slider">ALTA TECNOLOGÍA AL SERVICIO DE LA INDUSTRIA</h5>
 				<h3 class="content-text-slider">50 años en el rubro, fabricantes de sopletes </h3>
 			</div>

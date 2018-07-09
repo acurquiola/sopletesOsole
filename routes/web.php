@@ -11,14 +11,32 @@
 |
 */
 
-// Ruta para el inicio
+// Sección Home
 
 Route::get('/', function () {
     return view('home.home');
 });
 
-// Ruta para el inicio
+// Sección Empresa
 
 Route::get('/empresa', function () {
     return view('empresa.home');
+});
+
+// Sección Decargas
+
+Route::get('/descargas', function () {
+    return view('descargas.home');
+});
+
+// Sección Calidad
+
+Route::get('/calidad', function () {
+    return view('calidad.home');
+});
+
+// Sección Servicios
+
+Route::get('/servicios', function () {
+    return view('servicios.home');
 });

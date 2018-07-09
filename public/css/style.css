@@ -1,5 +1,6 @@
 html{
   font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px
 }
 
 /*Estilo para el nav*/
@@ -69,6 +70,11 @@ html{
     left: 25%;
     width: 50%;
     opacity: 0;
+	background: -moz-linear-gradient(top, rgba(58,58,58,0.8) 26%, rgba(58,58,58,0.41) 98%, rgba(58,58,58,0.4) 100%, rgba(58,58,58,0.4) 102%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, rgba(58,58,58,0.8) 26%,rgba(58,58,58,0.41) 98%,rgba(58,58,58,0.4) 100%,rgba(58,58,58,0.4) 102%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, rgba(58,58,58,0.8) 26%,rgba(58,58,58,0.41) 98%,rgba(58,58,58,0.4) 100%,rgba(58,58,58,0.4) 102%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc3a3a3a', endColorstr='#663a3a3a',GradientType=0 ); /* IE6-9 */
+	margin-top: 150px;
 }
 
 .title-text-slider{
@@ -91,6 +97,10 @@ html{
 
 #container-fluid{
   width: 100%;
+}
+
+#container-fluid-secciones{
+  width: 85%;
 }
 
 #container-fluid .card-destacados{
@@ -140,6 +150,7 @@ html{
 
 #footer{
 	background: #595959;
+	margin-top: 5%
 }
 
 #footer h5{
@@ -164,3 +175,85 @@ html{
     margin-left: 9%;
 }
 
+.title-text-servicios{
+	color: #4B4B4B;
+	font-size: 25px;
+	font-family: 'Source Sans Pro semibold';
+}
+
+.title-servicios h3{
+	color: #DF1319;
+	font-size: 48px;
+	font-family: 'Source Sans Pro light';
+}
+
+.title-servicios .divider{
+	background: #DF1319
+}
+
+.img-servicios img{
+	height: 290px;
+	width: 570px;
+}
+
+.divider-secciones{
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+.title-calidad{
+	font-family: 'Source Sans Pro semibold';
+	font-size: 35px;
+	color: #3F51B5;
+	font-style: italic;
+}
+
+.calidad-descargable-div{
+	padding: 20px !important;
+	background: #F8F8F8;
+	border: 1px solid #DDDDDD;
+	border-bottom: 3px solid #3F51B5;
+	height: 120px;
+
+}
+
+.title-text-calidad{
+	font-size: 18px;
+}
+
+.text-calidad-desc{
+	font-size: 18px
+}
+
+.card-descargas-div{
+	max-width: 200px;
+	height: 280px;
+	border: 1px solid #666666;
+}
+
+.title-text-descarga{
+	color: #666666;
+	font-size: 15px;
+	padding: 0px 20px 20px 0px;
+	height: 60px;
+	border-bottom: 1px solid #DDDDDD
+}
+
+.divider-descargas{
+	max-width: 200px;
+}
+
+.iconos-descargas{
+	width: 45px;
+	height: 30px;
+	margin-top: 2%
+}
+
+.down-icon{
+	color: white;
+	background: black
+}
+.view-icon{
+	color: white;
+	background: red
+}

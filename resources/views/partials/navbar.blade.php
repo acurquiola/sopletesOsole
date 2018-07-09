@@ -19,7 +19,7 @@
 					<li><a href=" {{ url('/productos')}} " {{ (\Request::is('productos*'))?"id=seccion-active":"" }}>PRODUCTOS</a></li>
 					<li><a href=" {{ url('/descargas')}} " {{ (\Request::is('descargas*'))?"id=seccion-active":"" }}>DESCARGAS</a></li>
 					<li><a href=" {{ url('/calidad')}} " {{ (\Request::is('calidad*'))?"id=seccion-active":"" }}>CALIDAD</a></li>
-					<li><a href=" {{ url('/servicio')}} " {{ (\Request::is('servicio*'))?"id=seccion-active":"" }}>SERVICIO</a></li>
+					<li><a href=" {{ url('/servicios')}} " {{ (\Request::is('servicios*'))?"id=seccion-active":"" }}>SERVICIOS</a></li>
 					<li><a href=" {{ url('/contacto')}} " {{ (\Request::is('contacto*'))?"id=seccion-active":"" }}>CONTACTO</a></li>
 				</ul>
 			</div>

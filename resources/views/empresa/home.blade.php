@@ -10,7 +10,7 @@
 		</h5>
 	</div>
 	<img class="responsive-img" src="images/quienessomos.png">
-	<div class="container" id="container-fluid">
+	<div class="container" id="container-fluid-secciones">
 		<div class="row" style="margin-top: 5%">
 			<div class="col s12">
 				<div class="col s12 m6 l6">
