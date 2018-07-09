@@ -9,7 +9,7 @@
 			DESCARGAS
 		</h5>
 	</div>
-	<div class="container" id="container-fluid-secciones">
+	<div class="container">
 		<div class="row" style="margin-top: 5%">
 			<div class="col s12 m6 l3" >
 				<div class="card hoverable card-descargas-div">

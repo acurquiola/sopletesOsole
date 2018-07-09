@@ -40,3 +40,11 @@ Route::get('/calidad', function () {
 Route::get('/servicios', function () {
     return view('servicios.home');
 });
+
+//Sección de Administrador
+
+Route::get('/adm', function() {
+    return view('admin.login');
+});
+
+
