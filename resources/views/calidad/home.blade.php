@@ -11,13 +11,13 @@
 	</div>
 	<div class="container" id="container-fluid-secciones">
 		<div class="row" style="margin-top: 5%">
-			<div class="col s12">
+			<div class="col s12" style="margin-bottom: 5%">
 				<div class="col s12 m6 l6 ">
-					<p class="flowt-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, ipsam quasi veniam dolor eos perspiciatis possimus 	nesciunt, laboriosam quia. Quis possimus ducimus maiores, doloremque magnam at ipsa odit architecto qui.Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+					<p class="flowt-text"> {!! $calidad->texto !!} </p>
 				</div>
 				<div class="col s12 m6 l6">
 					<h5 class="title-calidad">
-						Alta Tecnología al Servicio de la Industria
+						 {!! $calidad->titulo !!} 
 					</h5>
 					<div class="col s6">
 						<img src="images/logoCalidad1.png" alt="">
@@ -27,21 +27,25 @@
 					</div>
 				</div>
 			</div>
-			<div class="col s12" style="margin-top: 5%">
+
+			@if($descargas->count()>0)
+				@foreach($descargas as $d)
 				<div class="col s12 m6 l6 calidad-descargable-div" >
 					<div class="col s11 inline">
 						<div class="text-calidad-desc">
-						 	Política de Calidad
+						 	{!! $d->titulo !!} 
 						</div>
 						<div class="text-calidad-desc">
 						 	Ver Certificado
 						</div>
 					</div>
 					<div class="sol s1 inline">
-						<img src="images/logo_descarga.png" class="inline right" alt="" >
+						<a href=" {{route('calidad-down', $d->file)}}" target="_blank"><img src="images/logo_descarga.png" class="inline right" alt="" ></a>
 					</div>
 				</div>
-				<div class="col s12 m6 l6 calidad-descargable-div" >
+				@endforeach
+			@endif
+				<!-- <div class="col s12 m6 l6 calidad-descargable-div" >
 					<div class="col s11 inline">
 						<div class="text-calidad-desc">
 						 	ISO 9001:2008
@@ -54,8 +58,6 @@
 						<img src="images/logo_descarga.png" class="inline right" alt="" >
 					</div>
 				</div>
-			</div>
-			<div class="col s12" style="margin-top: 5%">
 				<div class="col s12 m6 l6 calidad-descargable-div" >
 					<div class="col s11 inline">
 						<div class="text-calidad-desc">
@@ -81,8 +83,7 @@
 					<div class="sol s1 inline">
 						<img src="images/logo_descarga.png" class="inline right" alt="" >
 					</div>
-				</div>
-			</div>
+				</div> -->
 		</div>
 	</div>
 </div>

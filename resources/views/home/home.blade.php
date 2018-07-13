@@ -6,16 +6,22 @@
 <body>
 
 	<!-- Slider  -->
-	@include('home.partials.slider')
-	
-	<!-- Productos destacados  -->
+	@if($sliders->count()>0)
+		@include('home.partials.slider')
+	@endif
 
-	@include('home.partials.destacados')
+	<!-- Productos destacados  -->
+	@if($destacados)
+		@include('home.partials.destacados')
+	@endif
+
 	
 
 	<!-- La empresa -->
+	@if($informacion)
+		@include('home.partials.trayectoria')
+	@endif
 
-	@include('home.partials.trayectoria')
 
 
 
@@ -25,7 +31,7 @@
 @include('partials.script')
 
 	<script>
-		$(document).ready(function(){
+		$(document).ready(function(){  
 			$('.slider').slider({
 				height: 690
 			})

@@ -11,21 +11,24 @@
 	</div>
 	<div class="container">
 		<div class="row" style="margin-top: 5%">
+			@foreach ($descargas as $d)
 			<div class="col s12 m6 l3" >
 				<div class="card hoverable card-descargas-div">
 					<div class="card-image card-descargas">
-						<img src="images/descargas1.png" class="responsive-img"> 
+						<img src=" {{ asset('images/'.$d->file_image)}} " class="responsive-img"> 
 					</div>
 				</div>
 				<div class="title-text-descarga">
-					<span>Catálogo de Productos</span>		
+					<span> {!! $d->titulo !!} </span>		
 				</div>	
 				<div class="inline">
-					<i class="material-icons small iconos-descargas down-icon center">vertical_align_bottom</i>
-					<i class="material-icons small iconos-descargas view-icon center">visibility</i>
+					
+					<a href=" {{route('descargas-down', $d->file)}}" target="_blank"><i class="material-icons small iconos-descargas down-icon center">vertical_align_bottom</i></a>
+					<a href=" {{route('descargas-view', $d->file)}}" target="_blank"><i class="material-icons small iconos-descargas view-icon center">visibility</i></a>
 				</div>
 			</div>
-			<div class="col s12 m6 l3" >
+			@endforeach
+			<!-- <div class="col s12 m6 l3" >
 				<div class="card hoverable  card-descargas-div" >
 					<div class="card-image card-descargas">
 						<img src="images/descargas2.png" class="responsive-img"> 
@@ -66,7 +69,7 @@
 					<i class="material-icons small iconos-descargas down-icon center">vertical_align_bottom</i>
 					<i class="material-icons small iconos-descargas view-icon center">visibility</i>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>

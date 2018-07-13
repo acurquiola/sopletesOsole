@@ -7,5 +7,39 @@ main {
   flex: 1 0 auto;
 }
 body {
-  background: #595959;
+  background: #C8C8C8;
+}
+
+.logo-admin{
+	margin-top: 15%;
+	margin-left: 10%;
+	margin-bottom: 15%;
+}
+
+.nav-admin{
+	background: #FFFFFF;
+}
+
+.nav-admin a{
+	color: #595959;
+}
+
+#container-fluid{
+	background: #FFFFFF;
+	margin-left: 26%;
+	min-height: 500px;
+	width: 70%
+
+}
+
+#toast-container {
+  top: auto !important;
+  right: auto !important;
+  bottom: 10%;
+  left:7%;
+}
+
+.index-table td img{
+	max-width: 80px;
+	max-height: 80px;
 }
