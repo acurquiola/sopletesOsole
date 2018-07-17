@@ -11,5 +11,10 @@
 					<span class="flow-text" id="content-empresa">{!! $informacion->contenido !!}</span>
 				</div>
 			</div>
+			<div class="col s12">
+				<div class="button-ficha-producto center-align">
+					<a href="{{action('SeccionEmpresaController@index')}}" class="waves-effect waves-light btn">CONOCÉ MÁS</a>
+				</div>
+			</div>
 		</div>
 	</div>

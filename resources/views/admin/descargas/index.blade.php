@@ -12,7 +12,7 @@
 			</div>
 			@endif 
 			<div class="col s12">
-				<h5>Empresa</h5>					
+				<h5>Descargas</h5>					
 				<div class="divider"></div>
 				<table class="index-table responsive-table ">
 					<thead>

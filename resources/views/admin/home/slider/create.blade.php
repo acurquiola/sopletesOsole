@@ -34,7 +34,7 @@
 						</div>
 						<div class="input-field col s6">
 							<select name="section_id" readonly>
-								<option value={{$secciones->id}}>  {{$secciones->nombre}} </option>
+								<option value="{{$secciones->id}}">  {{$secciones->nombre}} </option>
 							</select>
 						</div>
 						<h6 for="textarea1">Título</h6>

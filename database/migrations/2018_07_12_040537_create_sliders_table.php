@@ -16,7 +16,7 @@ class CreateSlidersTable extends Migration
         Schema::create('sliders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('file');
-            $table->string('orden', 2);
+            $table->string('orden', 2)->unique();
             $table->string('titulo');
             $table->string('subtitulo');
             $table->integer('section_id')->unsigned();

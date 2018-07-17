@@ -28,10 +28,10 @@
 				<li class="bold"><a class="collapsible-header waves-effect waves-grey" tabindex="0"><i class="material-icons">add_shopping_cart</i>Productos</a>
 					<div class="collapsible-body">
 						<ul>
-							<li><a href="#">Crear Familia</a></li>
-							<li><a href="#">Editar Familia</a></li>
-							<li><a href="#">Crear Producto</a></li>
-							<li><a href="#">Editar Producto</a></li>
+							<li><a href="{{ action('FamiliaController@create') }}">Crear Familia</a></li>
+							<li><a href="{{ action('FamiliaController@index') }}">Editar Familia</a></li>
+							<li><a href="{{ action('ProductoController@create') }}">Crear Producto</a></li>
+							<li><a href="{{ action('ProductoController@index') }}">Editar Producto</a></li>
 						</ul>
 					</div>
 				</li>
@@ -60,8 +60,8 @@
 				<li class="bold"><a class="collapsible-header waves-effect waves-grey" tabindex="0"><i class="material-icons">build</i>Servicios</a>
 					<div class="collapsible-body">
 						<ul>
-							<li><a href="#">Crear Servicio</a></li>
-							<li><a href="#">Editar Servicio</a></li>
+							<li><a href="{{ action('ServicioController@create') }}">Crear Servicio</a></li>
+							<li><a href="{{ action('ServicioController@index') }}">Editar Servicio</a></li>
 						</ul>
 					</div>
 				</li>

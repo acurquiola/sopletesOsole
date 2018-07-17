@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Destacado;
+use App\Producto;
 use App\Section;
 use App\Slider;
 use App\Text;
@@ -23,11 +24,13 @@ class HomeController extends Controller
         $sliders = Slider::where('section_id', $section->id)->orderBy('orden')->get();
 
         //Productos Destacados
-        $destacados = Destacado::all();
+        $destacados        = Destacado::all();
+        $destacadosNombres = Destacado::pluck('titulo');
+        $productos         = Producto::whereIn('nombre', $destacadosNombres)->get();
 
         //Informacion 
         $informacion = Text::first();
 
-        return view('home.home', ['sliders' => $sliders, 'destacados' => $destacados, 'informacion' => $informacion]);
+        return view('home.home', ['sliders' => $sliders, 'destacados' => $destacados, 'informacion' => $informacion, 'productos' => $productos, ]);
     }
 }

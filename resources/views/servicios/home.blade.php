@@ -12,62 +12,42 @@
 	<div class="container" id="container-fluid-secciones" >
 		<div class="row" style="margin-top: 5%">
 			<div class="col s12">
+				@foreach ($servicios as $s)
 				<div class="col s12 m4 l4 center">
-					<img src="images/servicios_logo1.png" alt="">
-					<h5 class="title-text-servicios">REPARACIÓN</h5>
+					<img src=" {{asset('images/'.$s->icono)}} " alt="">
+					<h5 class="title-text-servicios"> {!! $s->titulo !!} </h5>
 				</div>
-				<div class="col s12 m4 l4 center">
-					<img src="images/servicios_logo2.png" alt="">
-					<h5 class="title-text-servicios">POST VENTA</h5>
-				</div>
-				<div class="col s12 m4 l4 center">
-					<img src="images/servicios_logo3.png" alt="">
-					<h5 class="title-text-servicios">EQUIPOS</h5>
-				</div>
+				@endforeach
 			</div>
 		</div>
+		@foreach($servicios as $s)
 		<div class="row">
 			<div class="col s12">
-				<div class="col s12 m6 l6" class="img-servicios">
-					<img src="images/servicios1.png" class="responsive-img" alt="" >
-				</div>
-				<div class="col s12 m6 l6 title-servicios">
-					<h3>Reparación</h3>
-					  <div class="divider"></div>
+				@if($s->id%2==0)
+					<div class="col s12 m6 l6 title-servicios">
+						<h3>{!! $s->titulo !!} </h3>
+						<div class="divider"></div>
 
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, ipsam quasi veniam dolor eos perspiciatis possimus 	nesciunt, laboriosam quia. Quis possimus ducimus maiores, doloremque magnam at ipsa odit architecto qui.Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-				</div>
+						<p>{!! $s->contenido !!} </p>
+					</div>
+					<div class="col s12 m6 l6" class="img-servicios">
+						<img src=" {{ asset('images/'.$s->file_image)}} " class="responsive-img" alt="" >
+					</div>
+				@else
+					<div class="col s12 m6 l6" class="img-servicios">
+						<img src=" {{ asset('images/'.$s->file_image)}} " class="responsive-img" alt="" >
+					</div>
+					<div class="col s12 m6 l6 title-servicios">
+						<h3>{!! $s->titulo !!} </h3>
+						<div class="divider"></div>
+
+						<p>{!! $s->contenido !!} </p>
+					</div>
+				@endif
 			</div>
 		</div>
 		<div class="divider divider-secciones"></div>
-		<div class="row">
-			<div class="col s12">
-				<div class="col s12 m6 l6 title-servicios">
-					<h3>Post Venta</h3>
-					  <div class="divider"></div>
-
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, ipsam quasi veniam dolor eos perspiciatis possimus 	nesciunt, laboriosam quia. Quis possimus ducimus maiores, doloremque magnam at ipsa odit architecto qui.Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-				</div>
-				<div class="col s12 m6 l6" class="img-servicios">
-					<img src="images/servicios2.png" class="responsive-img" alt="" >
-				</div>
-			</div>
-		</div>
-		<div class="divider divider-secciones"></div>
-		<div class="row">
-			<div class="col s12">
-				<div class="col s12 m6 l6" class="img-servicios">
-					<img src="images/servicios3.png" class="responsive-img" alt="" >
-				</div>
-				<div class="col s12 m6 l6 title-servicios">
-					<h3>Equipos</h3>
-					  <div class="divider"></div>
-
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, ipsam quasi veniam dolor eos perspiciatis possimus 	nesciunt, laboriosam quia. Quis possimus ducimus maiores, doloremque magnam at ipsa odit architecto qui.Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-				</div>
-			</div>
-		</div>
-
+		@endforeach
 	</div>
 </div>
 

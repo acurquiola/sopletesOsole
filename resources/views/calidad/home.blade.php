@@ -45,45 +45,6 @@
 				</div>
 				@endforeach
 			@endif
-				<!-- <div class="col s12 m6 l6 calidad-descargable-div" >
-					<div class="col s11 inline">
-						<div class="text-calidad-desc">
-						 	ISO 9001:2008
-						</div>
-						<div class="text-calidad-desc">
-						 	Ver Certificado
-						</div>
-					</div>
-					<div class="sol s1 inline">
-						<img src="images/logo_descarga.png" class="inline right" alt="" >
-					</div>
-				</div>
-				<div class="col s12 m6 l6 calidad-descargable-div" >
-					<div class="col s11 inline">
-						<div class="text-calidad-desc">
-						 	INTI ISO 5175
-						</div>
-						<div class="text-calidad-desc">
-						 	Ver Certificado
-						</div>
-					</div>
-					<div class="sol s1 inline">
-						<img src="images/logo_descarga.png" class="inline right" alt="" >
-					</div>
-				</div>
-				<div class="col s12 m6 l6 calidad-descargable-div" >
-					<div class="col s11 inline">
-						<div class="text-calidad-desc">
-						 	Catálogo General
-						</div>
-						<div class="text-calidad-desc">
-						 	Ver Certificado
-						</div>
-					</div>
-					<div class="sol s1 inline">
-						<img src="images/logo_descarga.png" class="inline right" alt="" >
-					</div>
-				</div> -->
 		</div>
 	</div>
 </div>

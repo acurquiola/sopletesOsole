@@ -2,11 +2,11 @@
 		<div class="container" id="container-fluid-secciones" >
 			<div class="row" style="padding-bottom: 5%">
 				<div class="col s12 m6 l3">
-					<img src="images/logoFooter1.png" alt="" class="responsive-img" style="margin-top: 25%">
+					<img src="{{ asset('images/logoFooter1.png')}}" alt="" class="responsive-img" style="margin-top: 25%">
 				</div>
 				<div class="col s12 m6 l2">
-					<img src="images/logoFooter2.png" alt="" class="responsive-img">
-					<img src="images/logoFooter3.png" alt="" class="responsive-img">
+					<img src="{{ asset('images/logoFooter2.png')}}" alt="" class="responsive-img">
+					<img src="{{ asset('images/logoFooter3.png')}}" alt="" class="responsive-img">
 				</div>
 				<div class="col s12 m6 l3">
 					<h5>SITE MAP</h5>

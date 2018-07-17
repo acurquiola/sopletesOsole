@@ -1,6 +1,6 @@
 html{
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 18px
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 18px
 }
 
 /*Estilo para el nav*/
@@ -50,8 +50,8 @@ html{
 }
 
 
-	color: #6D6D6D;
-	font-family: 'Source Sans Pro semibold';
+color: #6D6D6D;
+font-family: 'Source Sans Pro semibold';
 }
 
 /*Estilos para el slider*/
@@ -66,10 +66,10 @@ html{
 }
 
 #slider-home .caption-home{
-    top: 15%;
-    left: 25%;
-    width: 50%;
-    opacity: 0;
+	top: 15%;
+	left: 25%;
+	width: 50%;
+	opacity: 0;
 	background: -moz-linear-gradient(top, rgba(58,58,58,0.8) 26%, rgba(58,58,58,0.41) 98%, rgba(58,58,58,0.4) 100%, rgba(58,58,58,0.4) 102%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(top, rgba(58,58,58,0.8) 26%,rgba(58,58,58,0.41) 98%,rgba(58,58,58,0.4) 100%,rgba(58,58,58,0.4) 102%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(to bottom, rgba(58,58,58,0.8) 26%,rgba(58,58,58,0.41) 98%,rgba(58,58,58,0.4) 100%,rgba(58,58,58,0.4) 102%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -80,12 +80,12 @@ html{
 .title-text-slider{
 	font-size: 25px;
 	font-family: 'Source Sans Pro semibold';
-    text-align: center;
+	text-align: center;
 }
 
 .content-text-slider{
 	font-family: 'Source Sans Pro semibold';
-    text-align: center;
+	text-align: center;
 	font-size: 65px;
 }
 
@@ -96,11 +96,11 @@ html{
 }
 
 #container-fluid{
-  width: 100%;
+	width: 100%;
 }
 
 #container-fluid-secciones{
-  width: 85%;
+	width: 85%;
 }
 
 #container-fluid .card-destacados{
@@ -116,7 +116,7 @@ html{
 
 #container-fluid .card .card-title-destacados{
 	font-family: 'Source Sans Pro semibold';
-    text-align: right;
+	text-align: right;
 	font-size: 19px;
 	width: 270px; 
 	height: 71px;
@@ -129,7 +129,7 @@ html{
 }
 
 #container-fluid-empresa{
-  	width: 100%;
+	width: 100%;
 	background: #F8F8F8;
 }
 
@@ -138,7 +138,7 @@ html{
 }
 
 #title-empresa{
-  	color: #DF1319;
+	color: #DF1319;
 	font-size: 48px;
 	font-family: 'Source Sans Pro light';
 }
@@ -170,9 +170,9 @@ html{
 }
 
 .cabecera-secciones h5{
-    position: absolute;
-    margin-top: 3%;
-    margin-left: 9%;
+	position: absolute;
+	margin-top: 3%;
+	margin-left: 9%;
 }
 
 .title-text-servicios{
@@ -256,4 +256,140 @@ html{
 .view-icon{
 	color: white;
 	background: red
+}
+
+#map {
+	max-height: 325px;
+	width: 100%;
+}
+
+
+
+.card-familias-div{
+	max-width: 270px;
+	height: 270px;
+	border: 1px solid #FFFFFF;
+}
+
+.title-text-familias{
+	font-family: 'Source Sans Pro semibold';
+	font-size: 15px;
+	color: #DF1319;
+}
+
+.cont-image{
+	width: 270px;
+	height:270px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+.card-familias div:hover{
+	background-color: rgb(147,152,158);
+	opacity: 0.5;
+	background-image: url('../images/mas.png');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+
+.collapsible-familia{
+	border-top: none !important;
+    border-right: none !important;
+    border-left: none !important;
+    margin: 0rem 0 0rem 0 !important;
+	border-bottom: 1px solid #93989E !important;
+}
+
+.collapsible-familia-header{
+	border-bottom: 1px solid #93989E !important;
+	color: #93989E !important;
+}
+
+
+.collapsible-familia ul li a{
+	color: #93989E !important;
+	font-family: 'Source Sans Pro semibold';
+}
+
+a.hover.collapsible-header.collapsible-familia-header.active{
+	color: #E1131B !important;
+	border-bottom: 1px solid #E1131B !important;
+	
+}
+
+a.hover.collapsible-header.collapsible-familia-header.active{
+	color: #E1131B !important;
+	border-bottom: 1px solid #E1131B !important;
+}
+
+a.hover.producto.active{
+	color: #E1131B !important;
+}
+
+.text-title-producto{
+	color: #E1131B;
+	font-size: 35px
+}
+
+.text-descripcion-producto{
+	color: #666666;
+	border-top: 1px solid #E1131B;
+	padding-top: 5%;
+	font-size: 18px;
+}
+
+.button-ficha-producto a{
+	background-color: #E1131B ;
+}
+
+.button-ficha-producto a:hover{
+	background-color:#FF4D4D ;
+}
+
+.imagen-producto-zoom {
+	width:  345px;
+	height: 300px;
+	border: 1px solid #93989E;
+}
+
+.imagen-producto-zoom img{
+  width: 90%;
+  height: auto;
+}
+
+
+.miniatura-img{
+	border: 1px solid #93989E;
+}
+
+.miniatura-img img{
+	height: 90px;
+}
+.alert-error{
+	background-color: #ef5350  !important;
+	color: #FFFFFF;
+	padding: 8px !important
+}
+.alert-success{
+	background-color: #03a9f4  !important;
+	color: #FFFFFF;
+	padding: 8px !important
+}
+
+
+@supports(object-fit: cover){
+    .imagen-producto-zoom img{
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+}
+@supports(object-fit: cover){
+    .miniatura-img img{
+      height: 90px;
+      object-fit: cover;
+      object-position: center center;
+    }
 }

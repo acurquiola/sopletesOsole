@@ -11,6 +11,8 @@
 |
 */
 
+//Visualización y descarga de archivos
+
 Route::get('/descargasView/{file}', function ($file) {
     return Storage::response("descargas/$file");
 })->name('descargas-view');
@@ -23,7 +25,6 @@ Route::get('/calidadDown/{file}', function ($file) {
     return Storage::download("calidad/$file");
 })->name('calidad-down');
 
-
 // Sección Home
 
 Route::get('/', 'HomeController@index');
@@ -31,12 +32,12 @@ Route::get('/', 'HomeController@index');
 Route::get('/empresa', 'SeccionEmpresaController@index');
 Route::get('/descargas', 'SeccionDescargaController@index');
 Route::get('/calidad', 'SeccionCalidadController@index');
-
-
-// Sección Servicios
-
-Route::get('/servicios', function () {
-    return view('servicios.home');
+Route::get('/servicios', 'SeccionServicioController@index');// Admin Home
+Route::prefix('/productos/')->group(function () {
+    Route::get('familias', 'SeccionProductoController@index');
+    Route::get('familias/show/{id}', 'SeccionProductoController@show');
+    Route::get('familias/show/producto/{id}', 'SeccionProductoController@showProducto');
+    Route::get('familias/show/producto/tag/{id}', 'SeccionProductoController@ShowEtiquetas');
 });
 
 //Sección de Administrador
@@ -68,10 +69,38 @@ Route::prefix('adm/descargas/')->group(function () {
 // Admin Calidad
 Route::prefix('adm/calidad/')->group(function () {
     Route::resource('contenido', 'CalidadController');
-	Route::resource('descargas', 'CalidadDescargaController');
+    Route::resource('descargas', 'CalidadDescargaController');
+});
+
+// Admin Servicios
+Route::prefix('adm/servicios/')->group(function () {
+    Route::resource('contenido', 'ServicioController');
 });
 
 
+// Admin Productos
+Route::prefix('adm/productos/')->group(function () {
+    Route::resource('familias', 'FamiliaController');
+    Route::resource('contenido', 'ProductoController');
+
+    Route::get('galeria/{producto}', 'ProductoController@galeriaCreate');
+    Route::post('galeria/store', 'ProductoController@galeriaStore');
+    Route::get('galeria/view/{producto}', 'ProductoController@galeriaView');
+    Route::get('galeria/delete/{id}', 'ProductoController@galeriaDelete');
+
+    Route::get('etiqueta/{producto}', 'ProductoController@etiquetaCreate');
+    Route::post('etiqueta/store', 'ProductoController@etiquetaStore');
+    Route::get('etiqueta/view/{producto}', 'ProductoController@etiquetaView');
+    Route::get('etiqueta/delete/{id}', 'ProductoController@etiquetaDelete');
+    
+    Route::get('familia/etiqueta/', 'ProductoController@familiaEtiquetaCreate');
+    Route::get('familia/view/{producto}', 'ProductoController@familiaView');
+    Route::post('familia/etiqueta/store', 'ProductoController@familiaEtiquetaStore');
+    Route::get('familia/etiqueta/delete/{id}', 'ProductoController@familiaEtiquetaDelete');
+});
+
+// Contacto
+Route::resource('/contacto', 'ContactoController');
 
 Route::get('adm/home', function() {
     //

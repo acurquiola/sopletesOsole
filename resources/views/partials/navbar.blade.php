@@ -12,11 +12,11 @@
 		<nav id="cabecera">
 			<div class="nav-wrapper">
 				<a href="{{ url('/') }}" class="brand-logo">
-					<img id="logo" src="images/logo.png" alt="">
+					<img id="logo" src="{{ asset('images/logo.png')}}" alt="">
 				</a>
 				<ul class="right hide-on-med-and-down secciones-nav-ul">
 					<li><a href=" {{ url('/empresa')}} " {{ (\Request::is('empresa*'))?"id=seccion-active":"" }}>EMPRESA</a></li>
-					<li><a href=" {{ url('/productos')}} " {{ (\Request::is('productos*'))?"id=seccion-active":"" }}>PRODUCTOS</a></li>
+					<li><a href=" {{ url('/productos/familias')}} " {{ (\Request::is('productos*'))?"id=seccion-active":"" }}>PRODUCTOS</a></li>
 					<li><a href=" {{ url('/descargas')}} " {{ (\Request::is('descargas*'))?"id=seccion-active":"" }}>DESCARGAS</a></li>
 					<li><a href=" {{ url('/calidad')}} " {{ (\Request::is('calidad*'))?"id=seccion-active":"" }}>CALIDAD</a></li>
 					<li><a href=" {{ url('/servicios')}} " {{ (\Request::is('servicios*'))?"id=seccion-active":"" }}>SERVICIOS</a></li>
