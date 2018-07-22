@@ -10,7 +10,7 @@
 		</h5>
 	</div>
 	@if($empresa)
-		<img src="{{ asset('images/'.$empresa->file_image) }}" class="responsive-img"> 		
+		<img style="width: 1492px" src="{{ asset('images/'.$empresa->file_image) }}" class="responsive-img"> 		
 		<div class="container" id="container-fluid-secciones">
 			<div class="row" style="margin-top: 5%">
 				<div class="col s12">
@@ -33,6 +33,10 @@
 
 
 @endsection
+
+
+
+@include('partials.script')
 
 </body>
 </html>

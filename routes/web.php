@@ -11,102 +11,137 @@
 |
 */
 
+
+//Autenticación
+	Auth::routes();
+
+//Autenticación con Facebook
+	Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider')->name('social.auth');
+	Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
+
+
+
 //Visualización y descarga de archivos
+	//Descarga-Seccion
+		Route::get('/descargasView/{file}', function ($file) {
+			return Storage::response("descargas/$file");
+		})->name('descargas-view');
 
-Route::get('/descargasView/{file}', function ($file) {
-    return Storage::response("descargas/$file");
-})->name('descargas-view');
+		Route::get('/descargasDown/{file}', function ($file) {
+			return Storage::download("descargas/$file");
+		})->name('descargas-down');
 
-Route::get('/descargasDown/{file}', function ($file) {
-    return Storage::download("descargas/$file");
-})->name('descargas-down');
+//Calidad-Seccion
+	Route::get('/calidadDown/{file}', function ($file) {
+		return Storage::download("calidad/$file");
+	})->name('calidad-down');
 
-Route::get('/calidadDown/{file}', function ($file) {
-    return Storage::download("calidad/$file");
-})->name('calidad-down');
+//Precios-Seccion
+	Route::get('/preciosView/{file}', function ($file) {
+		return Storage::response("precios/$file");
+	})->name('precios-view');
 
-// Sección Home
+	Route::get('/preciosDown/{file}', function ($file) {
+		return Storage::download("precios/$file");
+	})->name('precios-down');
 
-Route::get('/', 'HomeController@index');
+// Vista de Usuarios
+	Route::get('/', 'HomeController@index')->name('home.auth');
+	Route::get('/search', 'HomeController@buscador');
 
-Route::get('/empresa', 'SeccionEmpresaController@index');
-Route::get('/descargas', 'SeccionDescargaController@index');
-Route::get('/calidad', 'SeccionCalidadController@index');
-Route::get('/servicios', 'SeccionServicioController@index');// Admin Home
-Route::prefix('/productos/')->group(function () {
-    Route::get('familias', 'SeccionProductoController@index');
-    Route::get('familias/show/{id}', 'SeccionProductoController@show');
-    Route::get('familias/show/producto/{id}', 'SeccionProductoController@showProducto');
-    Route::get('familias/show/producto/tag/{id}', 'SeccionProductoController@ShowEtiquetas');
-});
+	Route::resource('/contacto', 'ContactoController');
 
-//Sección de Administrador
+	Route::get('/empresa', 'SeccionEmpresaController@index');
 
-//Login
-Route::get('/adm', function() {
-    return view('admin.login');
-    
-});
+	Route::get('/descargas', 'SeccionDescargaController@index');
 
+	Route::get('/calidad', 'SeccionCalidadController@index');
 
-// Admin Home
-Route::prefix('adm/home/')->group(function () {
-    Route::resource('slider', 'SliderController');
-    Route::resource('destacados', 'DestacadoController');
-    Route::resource('informacion', 'TextController');
-});
+	Route::get('/precios', 'SeccionPrecioController@index');
 
-// Admin Empresa
-Route::prefix('adm/empresa/')->group(function () {
-    Route::resource('contenido', 'EmpresaController');
-});
+	Route::get('/servicios', 'SeccionServicioController@index');
 
-// Admin Descarga
-Route::prefix('adm/descargas/')->group(function () {
-    Route::resource('contenido', 'DescargaController');
-});
+	Route::prefix('/productos/')->group(function () {
+		Route::get('familias', 'SeccionProductoController@index');
+		Route::get('familias/show/{id}', 'SeccionProductoController@show');
+		Route::get('familias/show/producto/{id}', 'SeccionProductoController@showProducto');
+		Route::get('familias/show/producto/tag/{id}', 'SeccionProductoController@ShowEtiquetas');
+	});
 
-// Admin Calidad
-Route::prefix('adm/calidad/')->group(function () {
-    Route::resource('contenido', 'CalidadController');
-    Route::resource('descargas', 'CalidadDescargaController');
-});
+//Vista de Administrador
+	Route::prefix('adm/')->group(function () {
 
-// Admin Servicios
-Route::prefix('adm/servicios/')->group(function () {
-    Route::resource('contenido', 'ServicioController');
-});
+	//Autenticación de Administradores 
+	    // Authentication Routes...
+	    Route::get('/', 'Admin\LoginController@showLoginForm')->name('admin.login');
+	    Route::post('login', 'Admin\LoginController@login');
+	    Route::post('logout', 'Admin\LoginController@logout')->name('admin.logout');
 
 
-// Admin Productos
-Route::prefix('adm/productos/')->group(function () {
-    Route::resource('familias', 'FamiliaController');
-    Route::resource('contenido', 'ProductoController');
+	    // Admin Home
+			Route::get('home/', function(){
+				return view('admin.home');
+			})->middleware('auth', 'admin');
+			Route::resource('slider', 'SliderController');
+			Route::get('slider/delete/{id}', 'SliderController@eliminar');
+			Route::resource('destacados', 'DestacadoController');
+			Route::resource('informacion', 'TextController');
 
-    Route::get('galeria/{producto}', 'ProductoController@galeriaCreate');
-    Route::post('galeria/store', 'ProductoController@galeriaStore');
-    Route::get('galeria/view/{producto}', 'ProductoController@galeriaView');
-    Route::get('galeria/delete/{id}', 'ProductoController@galeriaDelete');
+	    // Admin Empresa
+			Route::prefix('empresa/')->group(function () {
+				Route::resource('contenido', 'EmpresaController');
+			});
 
-    Route::get('etiqueta/{producto}', 'ProductoController@etiquetaCreate');
-    Route::post('etiqueta/store', 'ProductoController@etiquetaStore');
-    Route::get('etiqueta/view/{producto}', 'ProductoController@etiquetaView');
-    Route::get('etiqueta/delete/{id}', 'ProductoController@etiquetaDelete');
-    
-    Route::get('familia/etiqueta/', 'ProductoController@familiaEtiquetaCreate');
-    Route::get('familia/view/{producto}', 'ProductoController@familiaView');
-    Route::post('familia/etiqueta/store', 'ProductoController@familiaEtiquetaStore');
-    Route::get('familia/etiqueta/delete/{id}', 'ProductoController@familiaEtiquetaDelete');
-});
+	    // Admin Descarga
+			Route::prefix('descargas/')->group(function () {
+				Route::resource('contenido', 'DescargaController');
+				Route::get('delete/{id}', 'DescargaController@eliminar');
+			});
 
-// Contacto
-Route::resource('/contacto', 'ContactoController');
+	    // Admin Calidad
+			Route::prefix('calidad/')->group(function () {
+				Route::resource('contenido', 'CalidadController');
+				Route::resource('descargas', 'CalidadDescargaController');
+				Route::get('descargas/delete/{id}', 'CalidadDescargaController@eliminar');
+			});
 
-Route::get('adm/home', function() {
-    //
-    return view('admin.home');
-});
+	    // Admin Servicios
+			Route::prefix('servicios/')->group(function () {
+				Route::resource('contenido', 'ServicioController');
+				Route::get('delete/{id}', 'ServicioController@eliminar');
+			});
 
-Auth::routes();
+	    // Admin Servicios
+			Route::prefix('precios/')->group(function () {
+				Route::resource('contenido', 'PrecioController');
+				Route::get('delete/{id}', 'PrecioController@eliminar');
+			});
 
-Route::get('home', 'HomeController@index')->name('home');
+	    // Admin Usuarios
+			Route::prefix('usuarios/')->group(function () {
+				Route::resource('contenido', 'UserController')->except(['show']);
+				Route::get('contenido/delete/{id}', 'UserController@eliminar');
+			});
+
+	    // Admin Productos
+			Route::prefix('productos/')->group(function () {
+				Route::resource('familias', 'FamiliaController');
+				Route::get('/familias/delete/{id}', 'FamiliaController@eliminar');
+				Route::resource('contenido', 'ProductoController');
+
+				Route::get('galeria/{producto}', 'ProductoController@galeriaCreate');
+				Route::post('galeria/store', 'ProductoController@galeriaStore');
+				Route::get('galeria/view/{producto}', 'ProductoController@galeriaView');
+				Route::get('galeria/delete/{id}', 'ProductoController@galeriaDelete');
+
+				Route::get('etiqueta/{producto}', 'ProductoController@etiquetaCreate');
+				Route::post('etiqueta/store', 'ProductoController@etiquetaStore');
+				Route::get('etiqueta/view/{producto}', 'ProductoController@etiquetaView');
+				Route::get('etiqueta/delete/{id}', 'ProductoController@etiquetaDelete');
+
+				Route::get('familia/etiqueta/', 'ProductoController@familiaEtiquetaCreate');
+				Route::get('familia/view/{producto}', 'ProductoController@familiaView');
+				Route::post('familia/etiqueta/store', 'ProductoController@familiaEtiquetaStore');
+				Route::get('familia/etiqueta/delete/{id}', 'ProductoController@familiaEtiquetaDelete');
+			});
+	});

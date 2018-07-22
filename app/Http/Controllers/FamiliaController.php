@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Image;
 use App\Familia;
+use App\Producto;
 
 class FamiliaController extends Controller
 {
+
+    public function __construct(){
+
+        $this->middleware(['auth', 'admin']);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,6 +45,11 @@ class FamiliaController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'nombre'     => 'required|string',
+            'file_image' => 'required|image',
+        ]);
+
         $familia = Familia::all();
         $familia = $familia->last();
 
@@ -111,6 +123,10 @@ class FamiliaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'nombre'     => 'required|string',
+        ]);
+
         $familia = Familia::find($id);
 
         // ruta de las imagenes guardadas
@@ -151,8 +167,25 @@ class FamiliaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function eliminar($id)
+    {    //
+        $familia  = Familia::find($id);
+        $path     = $familia->file_image;
+        $productos = Producto::where('familia_id', $familia->id);
+
+        if($productos->count()<=0){
+            if(\File::exists(public_path('images/productos/familias/'.$path))){
+                if($familia->delete()){
+                    \File::delete(public_path('images/productos/familias/'.$path));
+                    return redirect()->back()->with('alert', "Registro eliminado exitósamente" );
+                }else{
+                    return redirect()->back()->with('errors', "Ocurrió un error al intentar eliminar el registro" );
+                }
+            }else{
+                return redirect()->back()->with('errors', "Imagen correspondiente no existe" );
+            } 
+        }else{
+            return redirect()->back()->with('errors', "La familia que desea eliminar tiene productos asociados. No se pudo completar la operación" );
+        }  
     }
 }

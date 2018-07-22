@@ -56,7 +56,6 @@ font-family: 'Source Sans Pro semibold';
 
 /*Estilos para el slider*/
 
-
 #slider-home div{
 	background: -moz-linear-gradient(top, rgba(58,58,58,0.8) 26%, rgba(58,58,58,0.41) 98%, rgba(58,58,58,0.4) 100%, rgba(58,58,58,0.4) 102%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(top, rgba(58,58,58,0.8) 26%,rgba(58,58,58,0.41) 98%,rgba(58,58,58,0.4) 100%,rgba(58,58,58,0.4) 102%); /* Chrome10-25,Safari5.1-6 */
@@ -228,7 +227,14 @@ font-family: 'Source Sans Pro semibold';
 .card-descargas-div{
 	max-width: 200px;
 	height: 280px;
+}
+
+.card-descargas{
 	border: 1px solid #666666;
+}
+
+.card-descargas img{
+	padding: 1px;
 }
 
 .title-text-descarga{
@@ -378,6 +384,10 @@ a.hover.producto.active{
 	padding: 8px !important
 }
 
+#login{
+	width: 300px !important; 
+	height: 270px  !important
+}
 
 @supports(object-fit: cover){
     .imagen-producto-zoom img{
@@ -393,3 +403,4 @@ a.hover.producto.active{
       object-position: center center;
     }
 }
+

@@ -26,9 +26,9 @@ body {
 
 #container-fluid{
 	background: #FFFFFF;
-	margin-left: 26%;
+	margin-left: 21%;
 	min-height: 500px;
-	width: 70%
+	width: 77%
 
 }
 
@@ -49,4 +49,19 @@ body {
     height: 100px;
     border: 1px solid #AEAEAE;
 
+}
+
+#nav-breadcrumb{
+	background-color: #424242;
+}
+
+.alert-error{
+	background-color: #ef5350  !important;
+	color: #FFFFFF;
+	padding: 8px !important
+}
+.alert-success{
+	background-color: #03a9f4  !important;
+	color: #FFFFFF;
+	padding: 8px !important
 }

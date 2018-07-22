@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Notifications\UserRegisteredSuccessfully;
 
 class RegisterController extends Controller
 {
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -49,9 +50,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'nombre'          => 'required|string|max:255',
+            'email'           => 'required|string|email|max:255|unique:users',
+            'password'        => 'required|string|min:6|confirmed',
+            'tipo_usuario_id' => 'required',
+            'username'        => 'required | unique:users,username'
         ]);
     }
 
@@ -63,10 +66,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $user                  = New User();
+        $user->nombre          = $data['nombre'];
+        $user->username        = $data['username'];
+        $user->email           = $data['email'];
+        $user->tipo_usuario_id = $data['tipo_usuario_id'];
+        $user->password        = bcrypt($data['password']);
+        $user->save();
+        $user->notify(new UserRegisteredSuccessfully($user));
+
+        return $user;
     }
 }

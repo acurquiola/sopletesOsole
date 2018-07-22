@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\Captcha;
+use App\Rules\ValidRecaptcha;
 
 
 class ContactoRequest extends FormRequest
@@ -30,7 +30,7 @@ class ContactoRequest extends FormRequest
             'telefono'             => 'required | numeric',
             'empresa'              => 'required | string',
             'email'                => 'required | email',
-            'g-recaptcha-response' => ['required', new Captcha]
+            'g-recaptcha-response' => ['required', new ValidRecaptcha] 
         ];
     }
 
@@ -43,6 +43,7 @@ class ContactoRequest extends FormRequest
     {
         return [
             'g-recaptcha-response.required' => 'ReCaptcha required!',
+            'g-recaptcha-response.captcha' => 'Captcha error! Inténtalo de nuevo!',
         ];
     }
 }

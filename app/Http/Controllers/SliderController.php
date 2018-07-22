@@ -9,6 +9,12 @@ use App\Slider;
 
 class SliderController extends Controller
 {
+
+    public function __construct(){
+
+        $this->middleware(['auth', 'admin']);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -177,8 +183,20 @@ class SliderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function eliminar($id)
+    {    //
+        $slider  = Slider::find($id);
+        $path     = $slider->file;
+
+        if(\File::exists(public_path('images/'.$path))){
+            if($slider->delete()){
+                \File::delete(public_path('images/'.$path));
+                return redirect()->back()->with('alert', "Registro eliminado exitósamente" );
+            }else{
+                return redirect()->back()->with('errors', "Ocurrió un error al intentar eliminar el registro" );
+            }
+        }else{
+            return redirect()->back()->with('errors', "Imagen correspondiente no existe" );
+        }   
     }
 }

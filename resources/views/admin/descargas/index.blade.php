@@ -4,13 +4,31 @@
 <main>
 	<div class="container" id="container-fluid">
 		<div class="row">
-			@if (session('alert'))
-			<div class="col s12">
-				<div class="toast" id="toast-container">
-					{{ session('alert') }}
-				</div>
+			@if($errors->count()>0)
+			<div class="card-panel alert-error">
+				<ul><li>ALERTA:
+					 {{ $errors }}
+					</li>
+				</ul>
 			</div>
-			@endif 
+			@endif
+
+			@if (session('alert'))
+			<div class="card-panel alert-success">
+				<ul><li>ALERTA:
+						{{ session('alert') }}				
+					</li>
+				</ul>
+			</div>
+			@endif
+			<nav>
+				<div class="nav-wrapper" id="nav-breadcrumb">
+					<div class="col s12">
+						<a href="{{ url('adm/home/' )}}" class="breadcrumb">Home</a>
+						<a href="{{ url('adm/descargas/contenido' )}}" class="breadcrumb">Descargas</a>
+					</div>
+				</div>
+			</nav>	
 			<div class="col s12">
 				<h5>Descargas</h5>					
 				<div class="divider"></div>
@@ -24,17 +42,21 @@
 					</thead>
 					<tbody>
 						@if($descargas->count()>0)
-							@foreach($descargas as $d)
-								<tr>
-									<td><img src="{{ asset('images/'.$d->file_image) }}"></td>
-									<td>{!! $d->titulo !!}</td>
-									<td><a href=" {{ action('DescargaController@edit', $d->id)}} "><i class="material-icons">edit</i></a></td>
-								</tr>
-							@endforeach
+						@foreach($descargas as $d)
+						<tr>
+							<td><img src="{{ asset('images/'.$d->file_image) }}"></td>
+							<td>{!! $d->titulo !!}</td>
+							<td>
+								<a href=" {{ action('DescargaController@edit', $d->id)}} "><i class="material-icons">edit</i></a>
+								<a onclick="return confirm('¿Realmente desea eliminar este registro?')" href=" {{ action('DescargaController@eliminar', $d->id)}} "><i class="material-icons">delete</i></a>
+
+							</td>
+						</tr>
+						@endforeach
 						@else
-							<tr>
-								<td colspan="4">No existen registros</td>
-							</tr>
+						<tr>
+							<td colspan="4">No existen registros</td>
+						</tr>
 						@endif
 					</tbody>
 				</table>

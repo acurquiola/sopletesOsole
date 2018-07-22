@@ -11,6 +11,7 @@ use App\Text;
 
 class HomeController extends Controller
 {
+
     /**
      * Show the application dashboard.
      *
@@ -32,5 +33,13 @@ class HomeController extends Controller
         $informacion = Text::first();
 
         return view('home.home', ['sliders' => $sliders, 'destacados' => $destacados, 'informacion' => $informacion, 'productos' => $productos, ]);
+    }
+
+    public function buscador(Request $request)
+    {
+        $busqueda  = $request->nombre;
+        $resultado = Producto::where('nombre', 'like', '%'.$busqueda.'%')->get();
+
+        return view('home.busqueda', ['resultado' => $resultado]);
     }
 }

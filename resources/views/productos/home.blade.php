@@ -33,5 +33,7 @@
 
 @endsection
 
+
+@include('partials.script')
 </body>
 </html>

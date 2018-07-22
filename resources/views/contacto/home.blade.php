@@ -10,32 +10,32 @@
 		</h5>
 	</div>
 
-	<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13127.637969215488!2d-58.6103759!3d-34.6569886!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc775be4805a3%3A0x81424aff10a7d080!2sSOPLETE+LIGA!5e0!3m2!1ses!2sve!4v1531789221815" width="1351" height="390" frameborder="0" style="border:0" allowfullscreen></iframe>
+	<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13127.637969215488!2d-58.6103759!3d-34.6569886!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc775be4805a3%3A0x81424aff10a7d080!2sSOPLETE+LIGA!5e0!3m2!1ses!2sve!4v1531789221815" width="1492" height="390" frameborder="0" style="border:0" allowfullscreen></iframe>
 
 
 	<div class="container" id="container-fluid-secciones">
 
 	
-		<div class="row" style="margin-top: 5%">
-		@if ($errors->any())
-		<div class="card-panel alert-error">
-			<ul><li>ALERTA:
-				@foreach ($errors->all() as $error)
-				 {{ $error }}
-				@endforeach
-				</li>
-			</ul>
-		</div>
-		@endif
+			<div class="row" style="margin-top: 5%">
+			@if ($errors->any())
+			<div class="card-panel alert-error">
+				<ul><li>ALERTA:
+					@foreach ($errors->all() as $error)
+					 {{ $error }}
+					@endforeach
+					</li>
+				</ul>
+			</div>
+			@endif
 
-		@if (session('alert'))
-		<div class="card-panel alert-success">
-			<ul><li>ALERTA:
-					{{ session('alert') }}				
-				</li>
-			</ul>
-		</div>
-		@endif
+			@if (session('alert'))
+			<div class="card-panel alert-success">
+				<ul><li>ALERTA:
+						{{ session('alert') }}				
+					</li>
+				</ul>
+			</div>
+			@endif
 			<form method="POST"  enctype="multipart/form-data" action="{{action('ContactoController@store')}}" class="col s12">
 				{{ csrf_field() }}
 
@@ -65,7 +65,7 @@
 						<label for="mensaje">Mensaje</label>
 					</div>
 					<div class="input-field col s6">
-						<div class="g-recaptcha" data-sitekey="6LeWhGQUAAAAAMpId_NtdriN-rHICCRgLdqgkuWc"></div>
+						<div class="g-recaptcha" data-sitekey = "{{env('GOOGLE_RECAPTCHA_SITE_KEY')}}"></div>
 					</div>
 				</div>
 				<div class="right button-ficha-producto">
@@ -84,10 +84,10 @@
 
 
 @include('partials.script')
+
 <script>
 
-	$(document).ready(function(){		
-		M.AutoInit();
+	$(document).ready(function(){	
 		$('.collapsible').collapsible();
 		$('select').formSelect();  
 		$('.summernote').summernote({

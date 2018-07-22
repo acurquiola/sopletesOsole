@@ -65,11 +65,19 @@
 						</ul>
 					</div>
 				</li>
-				<li class="bold"><a class="collapsible-header waves-effect waves-grey" tabindex="0"><i class="material-icons">share</i>Redes Sociales</a>
+				<li class="bold"><a class="collapsible-header waves-effect waves-grey" tabindex="0"><i class="material-icons">assignment</i>Listado de Precios</a>
 					<div class="collapsible-body">
 						<ul>
-							<li><a href="#">Crear Red Social</a></li>
-							<li><a href="#">Editar Red Social</a></li>
+							<li><a href="{{ action('PrecioController@create') }}">Crear Listado de Precios</a></li>
+							<li><a href="{{ action('PrecioController@index') }}">Editar Listado de Precios</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="bold"><a class="collapsible-header waves-effect waves-grey" tabindex="0"><i class="material-icons">people</i>Usuarios</a>
+					<div class="collapsible-body">
+						<ul>
+							<li><a href="{{ action('UserController@create') }}">Crear Usuarios</a></li>
+							<li><a href="{{ action('UserController@index') }}">Editar Usuarios</a></li>
 						</ul>
 					</div>
 				</li>

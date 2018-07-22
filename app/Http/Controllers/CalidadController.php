@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CalidadRequest;
 use App\Calidad;
 
 class CalidadController extends Controller
 {
+
+    public function __construct(){
+
+        $this->middleware(['auth', 'admin']);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -71,19 +78,18 @@ class CalidadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CalidadRequest $request, $id)
     {
+        $validated = $request->validated();
+
         $calidad         = Calidad::find($id);
         $calidad->titulo = $request->titulo;
         $calidad->texto  = $request->texto;
         if($calidad->save())
-            $alert="Registro actualizado exitósamente";
-        else
-            $alert="Ocurrió un error al intentar actualizar el registro";
-
-
-        return redirect('adm/calidad/contenido')->with('alert', $alert);
-    }
+           return redirect()->back()->with('alert', "Registro actualizado exitósamente" );
+       else
+           return redirect()->back()->with('errors', "Ocurrió un error al intentar actualizar el registro" );
+   }
 
     /**
      * Remove the specified resource from storage.

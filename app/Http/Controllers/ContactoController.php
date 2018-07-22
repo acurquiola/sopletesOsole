@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Mail\Contacto as ContactoEmail;
 use App\Http\Requests\ContactoRequest;
 use Mail;
 
@@ -20,71 +19,24 @@ class ContactoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ContactoRequest $request)
+    public function store(Request $request)
     {
-    	$validated = $request->validated();
-        Mail::to('anitau28@gmail.com')
-        ->send(new ContactoEmail());
-      
-    }
+    	$data = array(['nombre'   => $request->get('nombre'),
+								    		'telefono' => $request->get('telefono'),
+								    		'empresa'  => $request->get('empresa'),
+								    		'email'    => $request->get('email'),
+								    		'mensaje'  => $request->get('mensaje')]);
+    	Mail::send('contacto.email', $data[0], function($message){
+	    		$message->subject('Te han enviado un mensaje desde Sopletes Liga');
+	    		$message->to(env('ADMIN_MAIL'));
+	    	}
+	    );
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    	return redirect()->back()->with('alert', '¡Gracias por contactarnos!');
     }
 }

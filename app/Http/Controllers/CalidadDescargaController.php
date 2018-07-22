@@ -3,11 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CalidadDescargaRequest;
 use Illuminate\Support\Facades\Storage;
 use App\CalidadDescarga;
 
 class CalidadDescargaController extends Controller
 {
+
+    public function __construct(){
+
+        $this->middleware(['auth', 'admin']);
+
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -36,8 +44,10 @@ class CalidadDescargaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CalidadDescargaRequest $request)
     {
+        $validated = $request->validated();
+
         $descarga = CalidadDescarga::all();
         $descarga = $descarga->last();
 
@@ -56,13 +66,10 @@ class CalidadDescargaController extends Controller
         $descarga->titulo     = $request->titulo;
 
         if($descarga->save())
-            $alert="Registro guardado exitósamente";
+           return redirect()->back()->with('alert', "Registro almacenado exitósamente" );
         else
-            $alert="Ocurrió un error al intentar almacenar el registro";
-
-        return redirect('adm/calidad/descargas')->with('alert', $alert);
+           return redirect()->back()->with('errors', "Ocurrió un error al intentar almacenar el registro" );
     }
-
     /**
      * Display the specified resource.
      *
@@ -96,23 +103,27 @@ class CalidadDescargaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'titulo' => 'required|string',
+        ]);
+
         $descarga = CalidadDescarga::all();
         $descarga = $descarga->last();
 
-        //Almacenamiento del PDF
-        $ruta = 'calidad';
-        $path = Storage::putFileAs($ruta, $request->file('file'),'descarga'.$descarga->id.'.'.$request->file('file')->getClientOriginalExtension());
-        $rutaNombre = 'descarga'.$descarga->id.'.'.$request->file('file')->getClientOriginalExtension();
+        if($request->file('file')){
+            //Almacenamiento del PDF
+            $ruta       = 'calidad';
+            $path       = Storage::putFileAs($ruta, $request->file('file'),'descarga'.$descarga->id.'.'.$request->file('file')->getClientOriginalExtension());
+            $rutaNombre = 'descarga'.$descarga->id.'.'.$request->file('file')->getClientOriginalExtension();
 
-        $descarga->file       = $rutaNombre;
+            $descarga->file       = $rutaNombre;
+        }
         $descarga->titulo     = $request->titulo;
 
         if($descarga->save())
-            $alert="Registro actualizado exitósamente";
+           return redirect()->back()->with('alert', "Registro actualizado exitósamente" );
         else
-            $alert="Ocurrió un error al intentar actualizar el registro";
-
-        return redirect('adm/calidad/descargas')->with('alert', $alert);
+           return redirect()->back()->with('errors', "Ocurrió un error al intentar actualizar el registro" );
     }
 
     /**
@@ -121,8 +132,20 @@ class CalidadDescargaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function eliminar($id)
     {
         //
+        $cd  = CalidadDescarga::find($id);
+
+        $path     = $cd->file;
+        if(Storage::delete('calidad/'.$path)){
+            if($cd->delete()){
+                return redirect()->back()->with('alert', "Registro eliminado exitósamente" );
+            }else{
+                return redirect()->back()->with('errors', "Ocurrió un error al intentar eliminar el registro" );
+            }
+        }else{
+            return redirect()->back()->with('errors', "Archivo correspondiente no existe" );
+        }   
     }
 }

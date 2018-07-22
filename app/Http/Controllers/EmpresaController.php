@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\EmpresaRequest;
 Use Image;
 use App\Empresa;
 
 class EmpresaController extends Controller
 {
+
+    public function __construct(){
+
+        $this->middleware(['auth', 'admin']);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -72,8 +79,10 @@ class EmpresaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EmpresaRequest $request, $id)
     {
+        $validated = $request->validated();
+
         $empresa         = Empresa::find($id);
         
 
@@ -96,24 +105,22 @@ class EmpresaController extends Controller
                 $empresa->file_image = $temp_name;
                 $empresa->texto      = $request->texto;
                 if($empresa->save())
-                    $alert="Registro actualizado exitósamente";
+                 return redirect()->back()->with('alert', "Registro actualizado exitósamente" );
                 else
-                    $alert="Ocurrió un error al intentar actualizar el registro";
+                 return redirect()->back()->with('errors', "Ocurrió un error al intentar actualizar el registro" );
             }else{
-                $alert="Error al actualizar la imagen";
+                 return redirect()->back()->with('errors', "Ocurrió un error al intentar actualizar la imagen" );
             };
         }else{
             
         $empresa->texto    = $request->texto;
 
         if($empresa->save())
-            $alert="Registro actualizado exitósamente";
+            return redirect()->back()->with('alert', "Registro actualizado exitósamente" );
         else
-            $alert="Ocurrió un error al intentar actualizar el registro";
+            return redirect()->back()->with('errors', "Ocurrió un error al intentar actualizar el registro" );
 
         }
-
-        return redirect('adm/empresa/contenido')->with('alert', $alert);
     }
 
     /**

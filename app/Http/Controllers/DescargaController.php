@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\DescargaRequest;
 use Illuminate\Support\Facades\Storage;
 
 use Image;
@@ -10,6 +11,12 @@ use App\Descarga;
 
 class DescargaController extends Controller
 {
+
+	public function __construct(){
+
+		$this->middleware(['auth', 'admin']);
+
+	}
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +25,8 @@ class DescargaController extends Controller
     public function index()
     {
         //Informacion de la empresa
-        $descargas = Descarga::all();
-        return view('admin.descargas.index', ['descargas' => $descargas]);
+    	$descargas = Descarga::all();
+    	return view('admin.descargas.index', ['descargas' => $descargas]);
     }
 
     /**
@@ -29,7 +36,7 @@ class DescargaController extends Controller
      */
     public function create()
     {
-        return view('admin.descargas.create');
+    	return view('admin.descargas.create');
     }
 
     /**
@@ -38,53 +45,51 @@ class DescargaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DescargaRequest $request)
     {
-        $descarga = Descarga::all();
-        $descarga = $descarga->last();
+    	$validated = $request->validated();
 
-        if(!$descarga)
-            $num = 1;
-        else
-            $num = $descarga->id+1;
+    	$descarga = Descarga::all();
+    	$descarga = $descarga->last();
+
+    	if(!$descarga)
+    		$num = 1;
+    	else
+    		$num = $descarga->id+1;
 
         // ruta de las imagenes guardadas
-        $ruta           = public_path().'/images/';
-        
-        // recogida del form
-        $imagenOriginal = $request->file('file_image');
+    	$ruta           = public_path().'/images/';
 
-        
+        // recogida del form
+    	$imagenOriginal = $request->file('file_image');
+
+
         // crear instancia de imagen
-        $imagen         = Image::make($imagenOriginal);
-        
+    	$imagen         = Image::make($imagenOriginal);
+
         // generar un nombre aleatorio para la imagen
-        $temp_name      = 'descargas'.$num.'.'.$imagenOriginal->getClientOriginalExtension();
+    	$temp_name      = 'descargas'.$num.'.'.$imagenOriginal->getClientOriginalExtension();
 
         //Almacenamiento del PDF
-        $ruta = 'descargas';
-        $path = Storage::putFileAs($ruta, $request->file('file'),'descarga'.$num.'.'.$request->file('file')->getClientOriginalExtension());
-        $rutaNombre = 'descargas'.$num.'.'.$request->file('file')->getClientOriginalExtension();
+    	$ruta = 'descargas';
+    	$path = Storage::putFileAs($ruta, $request->file('file'),'descarga'.$num.'.'.$request->file('file')->getClientOriginalExtension());
+    	$rutaNombre = 'descargas'.$num.'.'.$request->file('file')->getClientOriginalExtension();
 
         // guardar imagen
         // save( [ruta], [calidad])
-        if ($imagen->save($ruta . $temp_name, 100)){
-            $descarga             = new Descarga;
-            $descarga->file_image = $temp_name;
-            $descarga->file       = $rutaNombre;
-            $descarga->titulo     = $request->titulo;
+    	if ($imagen->save($ruta . $temp_name, 100)){
+    		$descarga             = new Descarga;
+    		$descarga->file_image = $temp_name;
+    		$descarga->file       = $rutaNombre;
+    		$descarga->titulo     = $request->titulo;
 
-            if($descarga->save())
-                $alert="Registro guardado exitósamente";
-            else
-                $alert="Ocurrió un error al intentar almacenar el registro";
-        }else{
-            $alert="Error al cargar la imagen";
-        };
-
-
-
-        return redirect('adm/descargas/contenido')->with('alert', $alert);
+    		if($descarga->save())
+    			return redirect()->back()->with('alert', "Registro almacenando exitósamente" );
+    		else
+    			return redirect()->back()->with('errors', "Ocurrió un error al intentar almacenar el registro" );
+    	}else{
+    		return redirect()->back()->with('errors', "Ocurrió un error al cargar la imagen" );
+    	};
     }
 
     /**
@@ -106,9 +111,9 @@ class DescargaController extends Controller
      */
     public function edit($id)
     {
-        $descarga    = Descarga::find($id);
+    	$descarga    = Descarga::find($id);
 
-        return view('admin.descargas.edit', ['descarga' => $descarga]);
+    	return view('admin.descargas.edit', ['descarga' => $descarga]);
     }
 
     /**
@@ -120,53 +125,55 @@ class DescargaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $descarga         = Descarga::find($id);
+    	$validatedData = $request->validate([
+    		'titulo' => 'required|string',
+    	]);
 
-        if($request->file('file')!=null){
-            $ruta = 'descargas';
-            $path = Storage::putFileAs($ruta, $request->file('file'),'descarga'.$descarga->id.'.'.$request->file('file')->getClientOriginalExtension());
-            $rutaNombre = 'descargas'.$descarga->id.'.'.$request->file('file')->getClientOriginalExtension();
-            $descarga->file = $rutaNombre;
-        }
+    	$descarga         = Descarga::find($id);
 
-        if($request->file('file_image')!=null){
+    	if($request->file('file')!=null){
+    		$ruta = 'descargas';
+    		$path = Storage::putFileAs($ruta, $request->file('file'),'descarga'.$descarga->id.'.'.$request->file('file')->getClientOriginalExtension());
+    		$rutaNombre = 'descargas'.$descarga->id.'.'.$request->file('file')->getClientOriginalExtension();
+    		$descarga->file = $rutaNombre;
+    	}
+
+    	if($request->file('file_image')!=null){
             // ruta de las imagenes guardadas
-            $ruta           = public_path().'/images/';
-            
+    		$ruta           = public_path().'/images/';
+
             // recogida del form
-            $imagenOriginal = $request->file('file_image');
-            
+    		$imagenOriginal = $request->file('file_image');
+
             // crear instancia de imagen
-            $imagen         = Image::make($imagenOriginal);
-            
+    		$imagen         = Image::make($imagenOriginal);
+
             // generar un nombre aleatorio para la imagen
-            $temp_name      = 'descargas'.$id.'.'.$imagenOriginal->getClientOriginalExtension();
+    		$temp_name      = 'descargas'.$id.'.'.$imagenOriginal->getClientOriginalExtension();
 
             // guardar imagen
             // save( [ruta], [calidad])
-            if ($imagen->save($ruta . $temp_name, 100)){
-                $descarga->file_image = $temp_name;
-                $descarga->titulo     = $request->titulo;
+    		if ($imagen->save($ruta . $temp_name, 100)){
+    			$descarga->file_image = $temp_name;
+    			$descarga->titulo     = $request->titulo;
 
-                if($descarga->save())
-                    $alert="Registro actualizado exitósamente";
-                else
-                    $alert="Ocurrió un error al intentar actualizar el registro";
-            }else{
-                $alert="Error al actualizar la imagen";
-            };
-        }else{
+    			if($descarga->save())
+    			return redirect()->back()->with('alert', "Registro actualizado exitósamente" );
+    			else
+    				return redirect()->back()->with('errors', "Ocurrió un error al intentar actualizar el registro" );
+    		}else{
+    			return redirect()->back()->with('errors', "Ocurrió un error al intentar actualizar la imagen" );
+    		};
+    	}else{
 
-            $descarga->titulo    = $request->titulo;
+    		$descarga->titulo    = $request->titulo;
 
-            if($descarga->save())
-                $alert="Registro actualizado exitósamente";
-            else
-                $alert="Ocurrió un error al intentar actualizar el registro";
+    		if($descarga->save())
+    			return redirect()->back()->with('alert', "Registro actualizado exitósamente" );
+    		else
+    			return redirect()->back()->with('errors', "Ocurrió un error al intentar actualizar el registro" );
 
-        }
-
-        return redirect('adm/descargas/contenido')->with('alert', $alert);
+    	}
     }
 
     /**
@@ -175,8 +182,26 @@ class DescargaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function eliminar($id)
+    {  //
+        $descarga   = Descarga::find($id);
+        $path_image = $descarga->file_image;
+        $path_file  = $descarga->file;
+
+        if(\File::exists(public_path('images/'.$path_image))){
+            if(Storage::delete('descargas/'.$path_file)){
+                if($descarga->delete()){
+                    \File::delete(public_path('images/'.$path_image));
+                    return redirect()->back()->with('alert', "Registro eliminado exitósamente" );
+                }else{
+                    return redirect()->back()->with('errors', "Ocurrió un error al intentar eliminar el registro" );
+                }
+            }else{
+                return redirect()->back()->with('errors', "Archivo relacionado no encontrado" );
+            }
+        }else{
+            return redirect()->back()->with('errors', "Imagen correspondiente no encontrada" );
+        } 
     }
 }
+

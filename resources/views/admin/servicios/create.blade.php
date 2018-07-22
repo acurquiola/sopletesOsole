@@ -4,12 +4,38 @@
 <main>
 	<div class="container" id="container-fluid">
 		<div class="row">
+			<nav>
+				<div class="nav-wrapper" id="nav-breadcrumb">
+					<div class="col s12">
+						<a href="{{ url('adm/home/' )}}" class="breadcrumb">Home</a>
+						<a href="{{ url('adm/servicios/contenido' )}}" class="breadcrumb">Servicios</a>
+						<a href="!#" class="breadcrumb">Crear</a>
+					</div>
+				</div>
+			</nav>	
 			<div class="col s12">
+			@if($errors->count()>0)
+			<div class="card-panel alert-error">
+				<ul><li>ALERTA:
+					 {{ $errors }}
+					</li>
+				</ul>
+			</div>
+			@endif
+
+			@if (session('alert'))
+			<div class="card-panel alert-success">
+				<ul><li>ALERTA:
+						{{ session('alert') }}				
+					</li>
+				</ul>
+			</div>
+			@endif
 				<form method="POST"  enctype="multipart/form-data" action="{{action('ServicioController@store')}}" class="col s12 m8 offset-m2 xl10 offset-xl1">
 					{{ csrf_field() }}    
 
 					<div class="row">
-						<h5>Creae Servicio</h5>					
+						<h5>Crear Servicio</h5>					
 						<div class="divider"></div>
 						<div class="file-field input-field s6">
 							<div class="btn">
@@ -42,7 +68,7 @@
 							<textarea id="textarea1" class="summernote" name="contenido"> </textarea>
 						</div>
 						<div class="right">
-							<a class="waves-effect waves-light btn">Cancelar</a>
+							<a href="{{action('ServicioController@index')}}"  class="waves-effect waves-light btn">Cancelar</a>
 							<button class="btn waves-effect waves-light" type="submit" name="action">Submit
 								<i class="material-icons right">send</i>
 							</button>

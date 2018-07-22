@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook' => [
+        'client_id'     => '167983227289748',
+        'client_secret' => '577fb2fcc6b78113544c01ee551fd926',
+        'redirect'      => 'http://localhost/sopletesOsole/public/auth/facebook/callback'
+    ]
+
 ];

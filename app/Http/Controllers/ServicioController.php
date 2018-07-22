@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Image;
 use App\Servicio;
+use App\Http\Requests\ServicioRequest;
 
 class ServicioController extends Controller
 {
+
+    public function __construct(){
+
+        $this->middleware(['auth', 'admin']);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,8 +42,10 @@ class ServicioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ServicioRequest $request)
     {
+        $validated = $request->validated();
+
         $servicios = Servicio::all();
         $servicios = $servicios->last();
 
@@ -92,13 +101,12 @@ class ServicioController extends Controller
                 $servicio->icono      = $temp_nameL;
 
             if($servicio->save())
-                $alert="Registro almacenado exitósamente";
+                return redirect()->back()->with('alert', "Registro almacenando exitósamente" );
             else
-                $alert="Ocurrió un error al intentar almacenar el registro";
-
-        return redirect('adm/servicios/contenido')->with('alert', $alert);
+                return redirect()->back()->with('errors', "Ocurrió un error al intentar almacenar el registro" );
     }
 
+     
     /**
      * Display the specified resource.
      *
@@ -130,8 +138,13 @@ class ServicioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ServicioRequest $request, $id)
     {
+        $validatedData = $request->validate([
+            'titulo'    => 'required|string',
+            'contenido' => 'required|string',
+        ]);
+        
         $servicio = Servicio::find($id);
 
 
@@ -179,11 +192,9 @@ class ServicioController extends Controller
             $servicio->contenido = $request->contenido;
 
             if($servicio->save())
-                $alert="Registro actualizado exitósamente";
+                return redirect()->back()->with('alert', "Registro actualizado exitósamente" );
             else
-                $alert="Ocurrió un error al intentar actualizar el registro";
-
-        return redirect('adm/servicios/contenido')->with('alert', $alert);
+                return redirect()->back()->with('errors', "Ocurrió un error al intentar actualizar el registro" );
     }
 
     /**
@@ -192,8 +203,20 @@ class ServicioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function eliminar($id)
+    { //
+        $servicios  = Servicio::find($id);
+        $path     = $servicios->file_image;
+
+        if(\File::exists(public_path('images/productos/familias/'.$path))){
+            if($servicios->delete()){
+                \File::delete(public_path('images/'.$path));
+                return redirect()->back()->with('alert', "Registro eliminado exitósamente" );
+            }else{
+                return redirect()->back()->with('errors', "Ocurrió un error al intentar eliminar el registro" );
+            }
+        }else{
+            return redirect()->back()->with('errors', "Imagen correspondiente no existe" );
+        } 
     }
 }

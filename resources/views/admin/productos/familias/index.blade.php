@@ -4,13 +4,32 @@
 <main>
 	<div class="container" id="container-fluid">
 		<div class="row">
-			@if (session('alert'))
-			<div class="col s12">
-				<div class="toast" id="toast-container">
-					{{ session('alert') }}
-				</div>
+			@if($errors->count()>0)
+			<div class="card-panel alert-error">
+				<ul><li>ALERTA:
+					 {{ $errors }}
+					</li>
+				</ul>
 			</div>
-			@endif 
+			@endif
+
+			@if (session('alert'))
+			<div class="card-panel alert-success">
+				<ul><li>ALERTA:
+						{{ session('alert') }}				
+					</li>
+				</ul>
+			</div>
+			@endif
+			<nav>
+				<div class="nav-wrapper" id="nav-breadcrumb">
+					<div class="col s12">
+						<a href="{{ url('adm/home/' )}}" class="breadcrumb">Home</a>
+						<a href="{{ url('adm/productos/contenido' )}}" class="breadcrumb">Productos</a>
+						<a href="#!" class="breadcrumb">Familias</a>
+					</div>
+				</div>
+			</nav>	
 			<div class="col s12">
 				<h5>Familias</h5>					
 				<div class="divider"></div>
@@ -28,7 +47,10 @@
 								<tr>
 									<td><img src="{{ asset('images/productos/familias/'.$f->file_image) }}"></td>
 									<td>{!! $f->nombre !!}</td>
-									<td><a href=" {{ action('FamiliaController@edit', $f->id)}} "><i class="material-icons">edit</i></a></td>
+									<td>
+										<a href=" {{ action('FamiliaController@edit', $f->id)}} "><i class="material-icons">edit</i></a>
+										<a onclick="return confirm('¿Realmente desea eliminar este registro?')" href=" {{ action('FamiliaController@eliminar', $f->id)}} "><i class="material-icons">delete</i></a>
+									</td>
 								</tr>
 							@endforeach
 						@else

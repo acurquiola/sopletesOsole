@@ -2,11 +2,10 @@
 
 namespace App\Rules;
 
-
 use Illuminate\Contracts\Validation\Rule;
 use GuzzleHttp\Client;
 
-class Captcha implements Rule
+class ValidRecaptcha implements Rule
 {
     /**
      * Create a new rule instance.
@@ -27,18 +26,23 @@ class Captcha implements Rule
      */
     public function passes($attribute, $value)
     {
-        //Validate ReCaptcha
+        //
         $client = new Client([
-            'base_uri' => 'https://google.com/recaptcha/api/'
+            'base_uri' => 'https://www.google.com/recaptcha/api/siteverify'
         ]);
+
+
         $response = $client->post('siteverify', [
             'query' => [
-                'secret' => env('6LeWhGQUAAAAAO6JG_psHGqcC8c-Vra3V_L36hoK'),
+                'secret' => env('GOOGLE_RECAPTCHA_SECRET'),
                 'response' => $value
             ]
         ]);
 
+
+        
         return json_decode($response->getBody())->success;
+
     }
 
     /**
@@ -48,6 +52,6 @@ class Captcha implements Rule
      */
     public function message()
     {
-        return 'Completa el ReCaptcha para enviar el formulario.';
+        return 'Incorrect ReCaptcha.';
     }
 }
