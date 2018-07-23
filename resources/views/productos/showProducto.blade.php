@@ -21,7 +21,7 @@
 							<div class="collapsible-body" {{($f->id == $producto->familia->id)?"style=display:block":""}}>
 								<ul>
 									@foreach($f->productos as $p)
-									<li><a class="hover producto {{($p->id == $producto->id)?"active":""}}" href="{{ action('SeccionProductoController@showProducto', $p->id) }}" >{{ $p->nombre }}</a></li>
+									<li><a class="hover producto {{($p->id == $producto->id)?"active":""}}" href="{{ action('SeccionProductoController@showProducto', $p->id) }}" >{!! $p->nombre !!}</a></li>
 									@endforeach
 								</ul>
 							</div>
@@ -62,7 +62,7 @@
 						</div>
 						@if($producto->file!=null)
 						<div class="button-ficha-producto" style='margin-top:5%'>
-							<a href=" {{route('descargas-down', $producto->file)}}" target="_blank" class="waves-effect waves-light btn">DESCARGAR FICHA</a>
+							<a href=" {{route('producto-down', $producto->file)}}" target="_blank" class="waves-effect waves-light btn">DESCARGAR FICHA</a>
 						</div>
 						@endif
 					</div>
@@ -77,7 +77,7 @@
 						<ul class="tabs">						
 							@foreach($familiaEtiquetas as $f)
 
-							<li class="tab col s3"><a href="#{{$f->id}}">{{$f->nombre}}</a></li>
+							<li class="tab col s3"><a href="#{{$f->id}}">{!!$f->nombre!!}</a></li>
 							
 							@endforeach
 						</ul>

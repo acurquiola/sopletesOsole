@@ -81,6 +81,9 @@
 						@endif
 					</tbody>
 				</table>
+					<div class="center">
+						{{$productos->links('vendor.pagination.materializecss')}}
+					</div>
 
 			</div>
 		</div>

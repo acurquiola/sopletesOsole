@@ -24,7 +24,7 @@ class SeccionProductoController extends Controller
 
     public function show($id){
         $familias  = Familia::all();
-        $productos = Producto::where('familia_id', $id)->with('galerias')->get();
+        $productos = Producto::where('familia_id', $id)->with('galerias')->paginate(6);
         $familia   = Familia::find($id);
         return view('productos.show', ['familias' => $familias, 'productos' => $productos, 'familia' => $familia]);
     }

@@ -43,7 +43,7 @@ class LoginController extends Controller
         if(Auth::user()->tipo->nombre == 'Usuario'){
             $path = '/';
         }else{
-            $path = '/login'; 
+            $path = '/adm'; 
         }
         Auth::logout();
     return redirect($path);

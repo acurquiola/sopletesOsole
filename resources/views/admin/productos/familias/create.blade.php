@@ -49,7 +49,7 @@
 						</div>
 						<h6 for="textarea1">Nombre</h6>
 						<div class="input-field col s12">
-							<textarea id="textarea1" class="summernote" name="nombre"></textarea>
+							<input id="icon_prefix" type="text" class="validate" name="nombre">
 						</div>
 						<div class="right">
 							<a href="{{action('FamiliaController@index')}}"  class="waves-effect waves-light btn">Cancelar</a>

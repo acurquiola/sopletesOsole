@@ -68,6 +68,9 @@
 							@endif
 						</tbody>
 					</table>
+					<div class="center">
+						{{$users->links('vendor.pagination.materializecss')}}
+					</div>
 
 				</div>
 			</div>

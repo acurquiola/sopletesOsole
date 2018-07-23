@@ -36,6 +36,11 @@
 		return Storage::download("calidad/$file");
 	})->name('calidad-down');
 
+//Producto-Seccion
+	Route::get('/productoDown/{file}', function ($file) {
+		return Storage::download("producto/$file");
+	})->name('producto-down');
+
 //Precios-Seccion
 	Route::get('/preciosView/{file}', function ($file) {
 		return Storage::response("precios/$file");

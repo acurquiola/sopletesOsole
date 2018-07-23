@@ -49,9 +49,18 @@
 								<input class="file-path validate" type="text">
 							</div>
 						</div>
+						<div class="file-field input-field s6">
+							<div class="btn">
+								<span>Imagen</span>
+								<input type="file" name="file_image">
+							</div>
+							<div class="file-path-wrapper">
+								<input class="file-path validate" type="text">
+							</div>
+						</div>
 						<h6 for="textarea1">Nombre</h6>
-						<div class="input-field col s12">
-							<textarea id="textarea1" class="summernote" name="nombre"></textarea>
+						<div class="input-field col s12">								
+							<input id="icon_prefix" type="text" class="validate" name="nombre">
 						</div>
 						<h6 for="textarea1">Descripción</h6>
 						<div class="input-field col s12">

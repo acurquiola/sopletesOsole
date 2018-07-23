@@ -21,7 +21,7 @@
 							<div class="collapsible-body" {{($f->id == $familia->id)?"style=display:block":""}}>
 								<ul>
 									@foreach($f->productos as $p)
-									<li><a class="hover producto " href="{{ action('SeccionProductoController@showProducto', $p->id) }}">{{ $p->nombre }}</a></li>
+									<li><a class="hover producto " href="{{ action('SeccionProductoController@showProducto', $p->id) }}">{!! $p->nombre !!}</a></li>
 									@endforeach
 								</ul>
 							</div>
@@ -41,11 +41,16 @@
 							</div>
 						</div>
 						<div class="title-text-familias">
-							<span> {!!strtoupper( $p->nombre )!!} </span>		
+							<span>{{strtoupper($p->nombre)}} </span>		
 						</div>	
 					</a>
 				</div>
 				@endforeach
+				<div class="col s12">
+					<div class="center">
+						{{$productos->links('vendor.pagination.materializecss')}}
+					</div>
+				</div>
 			</div>
 
 

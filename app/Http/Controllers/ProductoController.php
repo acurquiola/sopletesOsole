@@ -30,7 +30,7 @@ class ProductoController extends Controller
     public function index()
     {
     	$familias  = Familia::all();
-    	$productos = Producto::all();
+    	$productos = Producto::paginate(7);
     	return view('admin.productos.index', ['familias' => $familias, 'productos' => $productos]);
     }
 
@@ -52,10 +52,18 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductoRequest $request)
+    public function store(Request $request)
     {
+        
 
-    	$validated = $request->validated();
+        $validatedData = $request->validate([
+            'nombre'      => 'required|string',
+            'orden'       => 'required|string|max:2',
+            'descripcion' => 'required|string',
+            'familia_id'  => 'required',
+            'file_image'  => 'required | image',
+        ]);
+
     	$producto = Producto::all();
     	$producto = $producto->last();
 
@@ -88,7 +96,7 @@ class ProductoController extends Controller
     		$imagen         = Image::make($imagenOriginal);
 
             // generar un nombre aleatorio para la imagen
-    		$temp_name      = 'productos'.$id.'.'.$imagenOriginal->getClientOriginalExtension();
+    		$temp_name      = 'productos'.$num.'.'.$imagenOriginal->getClientOriginalExtension();
 
             // guardar imagen
             // save( [ruta], [calidad])
